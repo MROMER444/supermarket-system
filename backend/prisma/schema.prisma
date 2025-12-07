@@ -1,0 +1,135 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  Product     Product[]
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  userId        Int
+  totalAmount   Decimal
+  discount      Decimal     @default(0.000000000000000000000000000000)
+  tax           Decimal     @default(0.000000000000000000000000000000)
+  paymentMethod String      @default("CASH")
+  status        String      @default("COMPLETED")
+  createdAt     DateTime    @default(now())
+  User          User        @relation(fields: [userId], references: [id])
+  OrderItem     OrderItem[]
+  Refund        Refund[]
+
+  @@index([userId], map: "Order_userId_fkey")
+}
+
+model OrderItem {
+  id         Int          @id @default(autoincrement())
+  orderId    Int
+  productId  Int
+  quantity   Int
+  price      Decimal
+  subtotal   Decimal
+  Order      Order        @relation(fields: [orderId], references: [id])
+  Product    Product      @relation(fields: [productId], references: [id])
+  RefundItem RefundItem[]
+
+  @@index([orderId], map: "OrderItem_orderId_fkey")
+  @@index([productId], map: "OrderItem_productId_fkey")
+}
+
+model Product {
+  id          Int          @id @default(autoincrement())
+  name        String
+  barcode     String       @unique
+  categoryId  Int
+  price       Decimal
+  costPrice   Decimal
+  quantity    Int
+  minQuantity Int          @default(10)
+  supplierId  Int?
+  expiryDate  DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  OrderItem   OrderItem[]
+  Category    Category     @relation(fields: [categoryId], references: [id])
+  Supplier    Supplier?    @relation(fields: [supplierId], references: [id])
+  RefundItem  RefundItem[]
+
+  @@index([categoryId], map: "Product_categoryId_fkey")
+  @@index([supplierId], map: "Product_supplierId_fkey")
+}
+
+model Settings {
+  id        Int     @id @default(autoincrement())
+  storeName String  @default("My Supermarket")
+  address   String?
+  currency  String  @default("IQD")
+  printerIp String?
+}
+
+model Supplier {
+  id          Int       @id @default(autoincrement())
+  name        String
+  contactInfo String?
+  address     String?
+  Product     Product[]
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  name      String
+  role      User_role @default(CASHIER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Order     Order[]
+  Refund    Refund[]
+}
+
+model Refund {
+  id          Int          @id @default(autoincrement())
+  orderId     Int
+  userId      Int
+  totalAmount Decimal
+  reason      String?
+  status      String       @default("COMPLETED")
+  createdAt   DateTime     @default(now())
+  Order       Order        @relation(fields: [orderId], references: [id])
+  User        User         @relation(fields: [userId], references: [id])
+  RefundItem  RefundItem[]
+
+  @@index([orderId])
+  @@index([userId])
+}
+
+model RefundItem {
+  id          Int       @id @default(autoincrement())
+  refundId    Int
+  orderItemId Int
+  productId   Int
+  quantity    Int
+  price       Decimal
+  subtotal    Decimal
+  OrderItem   OrderItem @relation(fields: [orderItemId], references: [id])
+  Product     Product   @relation(fields: [productId], references: [id])
+  Refund      Refund    @relation(fields: [refundId], references: [id])
+
+  @@index([refundId])
+  @@index([orderItemId])
+  @@index([productId])
+}
+
+enum User_role {
+  ADMIN
+  CASHIER
+}
