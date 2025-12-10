@@ -12,6 +12,7 @@ import POS from './pages/POS';
 import Orders from './pages/Orders';
 import Refunded from './pages/Refunded';
 import Reports from './pages/Reports';
+import UserManagement from './pages/UserManagement';
 import Settings from './pages/Settings';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
@@ -73,6 +74,14 @@ function App() {
                                 <Route path="/reports" element={<Reports />} />
                                 
                                 {/* Admin-only routes */}
+                                <Route 
+                                    path="/users" 
+                                    element={
+                                        <PrivateRoute roles={['ADMIN']}>
+                                            <UserManagement />
+                                        </PrivateRoute>
+                                    } 
+                                />
                                 <Route 
                                     path="/inventory" 
                                     element={

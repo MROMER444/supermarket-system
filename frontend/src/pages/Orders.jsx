@@ -30,7 +30,7 @@ const Orders = () => {
     const searchTimeoutRef = useRef(null);
     const { user } = useAuth();
     const { formatCurrency } = useSettings();
-    const { t } = useLanguage();
+    const { t, formatDate, formatTime, formatDateTime } = useLanguage();
 
     useEffect(() => {
         // Fetch all orders once to get unique cashiers (with large limit)
@@ -612,11 +612,11 @@ const Orders = () => {
                                                     <Calendar size={16} className="text-gray-400 dark:text-gray-500" />
                                                     <div className="text-sm">
                                                         <div className="font-semibold text-gray-900 dark:text-gray-100">
-                                                            {new Date(order.createdAt).toLocaleDateString()}
+                                                            {formatDate(order.createdAt)}
                                                         </div>
                                                         <div className="text-gray-500 dark:text-gray-400 text-xs flex items-center gap-1">
                                                             <Clock size={12} />
-                                                            {new Date(order.createdAt).toLocaleTimeString()}
+                                                            {formatTime(order.createdAt)}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -785,7 +785,7 @@ const Orders = () => {
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">{t('date')}</p>
-                                        <p className="font-semibold text-gray-800 dark:text-gray-100">{new Date(selectedOrder.createdAt).toLocaleString()}</p>
+                                        <p className="font-semibold text-gray-800 dark:text-gray-100">{formatDateTime(selectedOrder.createdAt)}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">

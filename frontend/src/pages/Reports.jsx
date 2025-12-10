@@ -20,7 +20,7 @@ const Reports = () => {
     const [withDiscount, setWithDiscount] = useState(false);
     const { user } = useAuth();
     const { formatCurrency } = useSettings();
-    const { t } = useLanguage();
+    const { t, formatDate, formatTime } = useLanguage();
 
     useEffect(() => {
         if (selectedDates.length > 0) {
@@ -110,12 +110,12 @@ const Reports = () => {
             // Prepare data for Excel
             let dateStr;
             if (selectedDates.length === 1) {
-                dateStr = new Date(selectedDates[0]).toLocaleDateString();
+                dateStr = formatDate(new Date(selectedDates[0]));
             } else if (selectedDates.length === 2) {
                 // Range mode
                 const sortedDates = [...selectedDates].sort();
-                const startDate = new Date(sortedDates[0]).toLocaleDateString();
-                const endDate = new Date(sortedDates[1]).toLocaleDateString();
+                const startDate = formatDate(new Date(sortedDates[0]));
+                const endDate = formatDate(new Date(sortedDates[1]));
                 dateStr = `${startDate} ${t('to') || 'to'} ${endDate}`;
             } else {
                 dateStr = `${selectedDates.length} ${t('dates') || 'dates'}`;
@@ -166,7 +166,7 @@ const Reports = () => {
                     const netAmount = originalAmount - refundedAmount;
                     
                     return [
-                        new Date(order.createdAt).toLocaleDateString(),
+                        formatDate(order.createdAt),
                         new Date(order.createdAt).toLocaleTimeString(),
                         `#${order.id}`,
                         statusText,
@@ -314,11 +314,11 @@ const Reports = () => {
     const formatDateRange = () => {
         if (selectedDates.length === 0) return '';
         if (selectedDates.length === 1) {
-            return new Date(selectedDates[0]).toLocaleDateString();
+            return formatDate(new Date(selectedDates[0]));
         }
         const sortedDates = [...selectedDates].sort();
-        const firstDate = new Date(sortedDates[0]).toLocaleDateString();
-        const lastDate = new Date(sortedDates[sortedDates.length - 1]).toLocaleDateString();
+        const firstDate = formatDate(new Date(sortedDates[0]));
+        const lastDate = formatDate(new Date(sortedDates[sortedDates.length - 1]));
         return `${firstDate} ${t('to')} ${lastDate}`;
     };
 
@@ -507,10 +507,10 @@ const Reports = () => {
                                     {dailyReport?.orders.map((order) => (
                                         <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                                {new Date(order.createdAt).toLocaleDateString()}
+                                                {formatDate(order.createdAt)}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                                                {new Date(order.createdAt).toLocaleTimeString()}
+                                                {formatTime(order.createdAt)}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">#{order.id}</td>
                                             <td className="px-6 py-4 whitespace-nowrap">

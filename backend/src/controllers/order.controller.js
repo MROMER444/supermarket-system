@@ -64,15 +64,17 @@ const getOrders = async (req, res) => {
         const { startDate, endDate, cashierId, orderId, status, page = 1, limit = 10 } = req.query;
         let where = {};
 
+        // Both ADMIN and CASHIER can see all orders
+        // Filter by cashierId if provided
+        if (cashierId) {
+            where.userId = parseInt(cashierId);
+        }
+
         if (startDate && endDate) {
             where.createdAt = {
                 gte: new Date(startDate),
                 lte: new Date(endDate),
             };
-        }
-
-        if (cashierId) {
-            where.userId = parseInt(cashierId);
         }
 
         if (orderId) {
@@ -200,9 +202,11 @@ const getOrders = async (req, res) => {
     }
 };
 
-        const getOrderById = async (req, res) => {
+const getOrderById = async (req, res) => {
     try {
         const { id } = req.params;
+        
+        // Both ADMIN and CASHIER can view any order
         const order = await prisma.order.findUnique({
             where: { id: parseInt(id) },
             include: { 
@@ -305,27 +309,22 @@ const getDailyReport = async (req, res) => {
         // Build where clause with OR conditions for multiple dates
         let whereClause;
         
+        // Both ADMIN and CASHIER can see all orders
         if (dateConditions.length > 1) {
             // Multiple dates - need to combine with discount filter properly
+            const andConditions = [{ OR: dateConditions }];
+            
             if (withDiscount === 'true' || withDiscount === true) {
-                whereClause = {
-                    AND: [
-                        { OR: dateConditions },
-                        { discount: { gt: 0 } }
-                    ]
-                };
-            } else {
-                whereClause = { OR: dateConditions };
+                andConditions.push({ discount: { gt: 0 } });
             }
+            
+            whereClause = { AND: andConditions };
         } else {
             // Single date condition
+            whereClause = { ...dateConditions[0] };
+            
             if (withDiscount === 'true' || withDiscount === true) {
-                whereClause = {
-                    ...dateConditions[0],
-                    discount: { gt: 0 }
-                };
-            } else {
-                whereClause = dateConditions[0];
+                whereClause.discount = { gt: 0 };
             }
         }
 

@@ -22,7 +22,7 @@ const Refunded = () => {
     const searchTimeoutRef = useRef(null);
     const { user } = useAuth();
     const { formatCurrency } = useSettings();
-    const { t, language } = useLanguage();
+    const { t, language, formatDate, formatTime, formatDateTime } = useLanguage();
 
     useEffect(() => {
         fetchRefundedOrders();
@@ -191,8 +191,8 @@ const Refunded = () => {
                     
                     return [
                         `#${order.id}`,
-                        new Date(order.createdAt).toLocaleDateString(),
-                        new Date(order.createdAt).toLocaleTimeString(),
+                        formatDate(order.createdAt),
+                        formatTime(order.createdAt),
                         order.user?.name || t('unknown') || 'Unknown',
                         statusText,
                         originalAmount,
@@ -488,7 +488,7 @@ const Refunded = () => {
                                                     <Calendar size={16} className="text-gray-400 dark:text-gray-500" />
                                                     <div className="text-sm">
                                                         <div className="font-semibold text-gray-900 dark:text-gray-100">
-                                                            {new Date(order.createdAt).toLocaleDateString()}
+                                                            {formatDate(order.createdAt)}
                                                         </div>
                                                         <div className="text-gray-500 dark:text-gray-400 text-xs flex items-center gap-1">
                                                             <Clock size={12} />
@@ -637,7 +637,7 @@ const Refunded = () => {
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">{t('date')}</p>
-                                        <p className="font-semibold text-gray-800 dark:text-gray-100">{new Date(selectedOrder.createdAt).toLocaleString()}</p>
+                                        <p className="font-semibold text-gray-800 dark:text-gray-100">{formatDateTime(selectedOrder.createdAt)}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">

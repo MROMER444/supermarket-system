@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, Users, ShoppingCart, FileText, Settings, LogOut, RotateCcw } from 'lucide-react';
+import { LayoutDashboard, Package, Users, ShoppingCart, FileText, Settings, LogOut, RotateCcw, UserPlus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useSettings } from '../context/SettingsContext';
@@ -21,6 +21,7 @@ const Sidebar = () => {
         { path: '/orders', icon: FileText, label: t('orders'), roles: ['ADMIN', 'CASHIER'] },
         { path: '/refunded', icon: RotateCcw, label: t('refunded') || 'Refunded', roles: ['ADMIN', 'CASHIER'] },
         { path: '/reports', icon: FileText, label: t('reports'), roles: ['ADMIN', 'CASHIER'] },
+        { path: '/users', icon: UserPlus, label: t('userManagement'), roles: ['ADMIN'] },
         { path: '/settings', icon: Settings, label: t('settings'), roles: ['ADMIN'] },
     ];
 

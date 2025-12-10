@@ -44,7 +44,7 @@ const StatCard = ({ title, value, icon: Icon, color, gradient }) => {
 const AdminDashboard = () => {
     const { formatCurrency } = useSettings();
     const { user } = useAuth();
-    const { t, language } = useLanguage();
+    const { t, language, formatDate, formatTime } = useLanguage();
     const navigate = useNavigate();
     const [stats, setStats] = useState({
         dailySales: 0,
@@ -136,7 +136,7 @@ const AdminDashboard = () => {
                 <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-gray-800 via-blue-600 to-purple-600 dark:from-gray-100 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
                     {t('dashboard')}
                 </h1>
-                <p className="text-gray-500 dark:text-gray-400">{new Date().toLocaleDateString(language === 'ar' ? 'ar-SA' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <p className="text-gray-500 dark:text-gray-400">{formatDate(new Date(), { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 auto-rows-fr">
@@ -245,7 +245,7 @@ const AdminDashboard = () => {
                                                     {order.createdAt ? (() => {
                                                         const date = new Date(order.createdAt);
                                                         if (isNaN(date.getTime())) return t('dateNotAvailable') || 'Date not available';
-                                                        return `${date.toLocaleDateString()} • ${date.toLocaleTimeString()}`;
+                                                        return `${formatDate(date)} • ${formatTime(date)}`;
                                                     })() : (
                                                         t('dateNotAvailable') || 'Date not available'
                                                     )}

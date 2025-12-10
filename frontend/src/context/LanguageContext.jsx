@@ -110,8 +110,6 @@ const translations = {
         previous: 'Previous',
         next: 'Next',
         noTransactions: 'No transactions found for this date',
-        exportToExcel: 'Export to Excel',
-        exportFailed: 'Failed to export to Excel',
         dateRange: 'Date Range',
         from: 'From',
         selectDates: 'Select Dates',
@@ -313,11 +311,46 @@ const translations = {
         noRefundedOrdersYet: 'No refunded orders yet',
         noOrdersFoundForSearch: 'No orders found for your search',
         searchByOrderId: 'Search by Order ID...',
-        exportToExcel: 'Export to Excel',
-        exportFailed: 'Failed to export to Excel. Please try again.',
         dateNotAvailable: 'Date not available',
         sessionExpired: 'Your session has expired. Please log out and log back in. Would you like to log out now?',
         failedToSaveProduct: 'Failed to save product',
+        
+        // User Management
+        userManagement: 'User Management',
+        createNewUser: 'Create New User',
+        addUser: 'Add User',
+        userName: 'Full Name',
+        enterUserName: 'Enter full name',
+        userEmail: 'Email Address',
+        enterUserEmail: 'Enter email address',
+        userPassword: 'Password',
+        enterUserPassword: 'Enter password',
+        userRole: 'Role',
+        selectUserRole: 'Select user role',
+        admin: 'Admin',
+        createUser: 'Create User',
+        userCreatedSuccessfully: 'User created successfully!',
+        failedToCreateUser: 'Failed to create user',
+        userAlreadyExists: 'User with this email already exists',
+        userManagementDescription: 'Use the button above to create new users. You can assign them either Admin or Cashier roles.',
+        totalUsers: 'Total Users',
+        noUsersYet: 'No users yet',
+        getStartedCreateUser: 'Get started by creating your first user',
+        userList: 'User List',
+        createdAt: 'Created At',
+        role: 'Role',
+        editUser: 'Edit User',
+        deleteUser: 'Delete User',
+        editUserTitle: 'Edit User',
+        updateUser: 'Update User',
+        userUpdatedSuccessfully: 'User updated successfully!',
+        failedToUpdateUser: 'Failed to update user',
+        deleteUserConfirm: 'Are you sure you want to delete this user?',
+        userDeletedSuccessfully: 'User deleted successfully!',
+        failedToDeleteUser: 'Failed to delete user',
+        cannotDeleteOwnAccount: 'You cannot delete your own account',
+        passwordOptional: 'Password (Optional)',
+        leaveEmptyToKeepPassword: 'Leave empty to keep current password',
     },
     ar: {
         // Navigation
@@ -418,8 +451,6 @@ const translations = {
         previous: 'السابق',
         next: 'التالي',
         noTransactions: 'لم يتم العثور على معاملات لهذا التاريخ',
-        exportToExcel: 'تصدير إلى Excel',
-        exportFailed: 'فشل التصدير إلى Excel',
         dateRange: 'نطاق التاريخ',
         from: 'من',
         selectDates: 'اختر التواريخ',
@@ -621,11 +652,46 @@ const translations = {
         noRefundedOrdersYet: 'لا توجد طلبات مستردة بعد',
         noOrdersFoundForSearch: 'لم يتم العثور على طلبات للبحث',
         searchByOrderId: 'البحث برقم الطلب...',
-        exportToExcel: 'تصدير إلى Excel',
-        exportFailed: 'فشل التصدير إلى Excel. يرجى المحاولة مرة أخرى.',
         dateNotAvailable: 'التاريخ غير متاح',
         sessionExpired: 'انتهت صلاحية جلستك. يرجى تسجيل الخروج وتسجيل الدخول مرة أخرى. هل تريد تسجيل الخروج الآن؟',
         failedToSaveProduct: 'فشل حفظ المنتج',
+        
+        // User Management
+        userManagement: 'إدارة المستخدمين',
+        createNewUser: 'إنشاء مستخدم جديد',
+        addUser: 'إضافة مستخدم',
+        userName: 'الاسم الكامل',
+        enterUserName: 'أدخل الاسم الكامل',
+        userEmail: 'البريد الإلكتروني',
+        enterUserEmail: 'أدخل البريد الإلكتروني',
+        userPassword: 'كلمة المرور',
+        enterUserPassword: 'أدخل كلمة المرور',
+        userRole: 'الدور',
+        selectUserRole: 'اختر دور المستخدم',
+        admin: 'مدير',
+        createUser: 'إنشاء مستخدم',
+        userCreatedSuccessfully: 'تم إنشاء المستخدم بنجاح!',
+        failedToCreateUser: 'فشل إنشاء المستخدم',
+        userAlreadyExists: 'المستخدم بهذا البريد الإلكتروني موجود بالفعل',
+        userManagementDescription: 'استخدم الزر أعلاه لإنشاء مستخدمين جدد. يمكنك تعيينهم إما كمدير أو كاشير.',
+        totalUsers: 'إجمالي المستخدمين',
+        noUsersYet: 'لا يوجد مستخدمون بعد',
+        getStartedCreateUser: 'ابدأ بإنشاء أول مستخدم',
+        userList: 'قائمة المستخدمين',
+        createdAt: 'تاريخ الإنشاء',
+        role: 'الدور',
+        editUser: 'تعديل المستخدم',
+        deleteUser: 'حذف المستخدم',
+        editUserTitle: 'تعديل المستخدم',
+        updateUser: 'تحديث المستخدم',
+        userUpdatedSuccessfully: 'تم تحديث المستخدم بنجاح!',
+        failedToUpdateUser: 'فشل تحديث المستخدم',
+        deleteUserConfirm: 'هل أنت متأكد أنك تريد حذف هذا المستخدم؟',
+        userDeletedSuccessfully: 'تم حذف المستخدم بنجاح!',
+        failedToDeleteUser: 'فشل حذف المستخدم',
+        cannotDeleteOwnAccount: 'لا يمكنك حذف حسابك الخاص',
+        passwordOptional: 'كلمة المرور (اختياري)',
+        leaveEmptyToKeepPassword: 'اتركه فارغاً للاحتفاظ بكلمة المرور الحالية',
     }
 };
 
@@ -649,8 +715,33 @@ export const LanguageProvider = ({ children }) => {
         setLanguage(prev => prev === 'en' ? 'ar' : 'en');
     };
 
+    // Helper function to format dates consistently with Gregorian calendar
+    const formatDate = (date, options = {}) => {
+        const dateObj = date instanceof Date ? date : new Date(date);
+        if (isNaN(dateObj.getTime())) return '';
+        
+        const locale = language === 'ar' ? 'ar-SA-u-ca-gregory' : 'en-US';
+        return dateObj.toLocaleDateString(locale, options);
+    };
+
+    const formatTime = (date) => {
+        const dateObj = date instanceof Date ? date : new Date(date);
+        if (isNaN(dateObj.getTime())) return '';
+        
+        const locale = language === 'ar' ? 'ar-SA-u-ca-gregory' : 'en-US';
+        return dateObj.toLocaleTimeString(locale);
+    };
+
+    const formatDateTime = (date) => {
+        const dateObj = date instanceof Date ? date : new Date(date);
+        if (isNaN(dateObj.getTime())) return '';
+        
+        const locale = language === 'ar' ? 'ar-SA-u-ca-gregory' : 'en-US';
+        return dateObj.toLocaleString(locale);
+    };
+
     return (
-        <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t }}>
+        <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t, formatDate, formatTime, formatDateTime }}>
             {children}
         </LanguageContext.Provider>
     );
